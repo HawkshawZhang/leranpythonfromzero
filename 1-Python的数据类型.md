@@ -604,7 +604,7 @@ OUT: [[1,2,3,10],[5,6,7]]
 
 #### 深拷贝
 
-+ 不仅仅是对第一层数据进行了copy,对深层数据也进行copy，原始变量和新变量完全不共享数据。类似于软连接和硬链接
++ 不仅仅是对第一层数据进行了copy,对深层数据也进行copy，原始变量和新变量完全不共享数据。类似于软连接和硬链接，归根到底共享内存地址。
 
 ```python
 a = [[1,2,3],[5,6,7]]
@@ -616,15 +616,347 @@ OUT: [[1,2,3,10],[5,6,7]]
 OUT: [[1,2,3],[5,6,7]]
 ```
 
+### 列表的extend()
+
+#### extend()的功能
+
+将其他列表或者元组中的元素依次导入当前列表中。
+
+#### extend()的用法
+
++ list.extend(iterable)
++ 参数：iterable:代表列表或者元组，该函数无返回值。
+
+```python
+students = ['james', 'xiaomu', 'xiaowang']
+new_students = ['xiaogang', 'xiaohong']
+students.extend(new_students)
+print(students)
+OUT: ['james', 'xiaomu', 'xiaowang','xiaogang', 'xiaohong']
+```
+
+### 列表的索引
+
+#### 什么是索引
+
++ 字符串，列表，元组
++ 从最左边记录的位置就说索引
++ 索引用数字表示，起始从0开始
++ 最大索引是长度-1
+
+#### 什么是切片
+
++ 索引是对单个元素进行访问，切片则是对一定范围的元素进行访问。
++ 切片是通过冒号在中括号内把相隔的两个索引查找出来 [0:10]
++ 切片的规则：左含，右不含。
+
+#### 列表的索引，获取与修改
+
+获取完整列表的方法
+
++ numbers[:]
++ numbers[0:]
+
+除最后一个元素获取不到
+
++ numbers[:-1]
+
+列表的反序
+
++ numbers[::-1]
+
+通过步长，跳跃获取
+
++ numbers[0:8:2]
+
+切片生成空列表
+
++ number[0:0]
+
+通过索引修改列表
+
++ list[index] = new_item。
++ 数据的修改只能存在于索引范围内。
++ 列表无法通过添加新的索引的方式赋值
++ list.inde(item)
+
+#### 通过pop()删除索引
+
++ 通过索引弹出（删除并获取）列表的元素。
++ list.pop(index)
++ index:删除列表的第几个索引
 
 
 
+#### 通过del()删除索引
 
++ del list[index]
++ 直接删除，无返回值
++ 如果index不存在，则报错
 
+#### 索引在元组中的特殊性
 
++ 可以和列表一样获取索引和切片索引
++ 元组函数index和列表用法完全一致
++ 无法通过索引修改与删除元素
 
+### 列表之字符串切片
 
+#### 字符串的索引与切片
 
++ 字符串索引规则和列表相同
++ 切片和索引的获取与列表相同
++ 无法通过索引修改和删除
++ 字符串不可修改
+
+#### find()和inde()
+
++ 功能：获取元素的索引位置
++ string.index(item)  --->item:查询个数的元素，返回索引位置。
++ string.find(item)    ----->item:查询个数的元素，返回索引位置。
++ find()找不到返回-1，找到返回1
 
 ## 字典的操作以及其他的内置函数
+
+### 字典中添加数据的方法
+
+#### []处理法
+
++ 字典里没有索引
++ dict['name'] = 'James'
++ 添加或者修改，根据key是否存在决定
+
+#### 字典内置函数update
+
++ 添加新的字典，新字典中的key和原字典相同，则key的value会被新字典value覆盖。
++ dict.update(new_dict) ------------> 该函数无返回值
++ new_dict: 新的字典
+
+#### 字典的内置函数setdefault
+
++ 可以获取某个key的value，如果key不存在于字典中，将会添加key并将value设置为默认值。
++ dict.setdefault(key, value)
++ key ---> 需要获取的key, value ----> 如果key不存在，对应的key存入字典的默认值。
+
+#### 注意事项
+
++ 字典中每个key都是唯一的
++ 字典中的数据量没有限制的
++ 字典中的value是可以是任何Python的内置数据类型的对象和自定义对象（函数）。
+
+### 字典中的Keys函数
+
+#### 功能
+
+获取当前字典中所有的键（key)
+
+#### 用法
+
++ dict.keys()  ------> 无需传参，返回一个key集合的伪列表
++ 伪列表，无法操作列表的所有功能。
+
+```python
+my_dict = {'name': 'James', 'age':33}
+my_dict.keys()
+OUT: dict_keys(['name', 'age'])
+    
+key_list = list(my_dict.keys())
+print(key_list)
+OUT:['name', 'age']
+```
+
+### 字典中的values()
+
+#### 功能
+
+获取字典中所有键值对中的值（value)
+
+#### 用法
+
++ dict.values()         --------> 无须传参，返回一个value集合的伪列表
+
+### 字典key的获取
+
+
+
+#### []的获取方法
+
+```python
+my_dict = {'name': 'James', 'age': 33}
+name = my_dict['name']
+print(name)
+OUT:	James
+```
+
++ 字典+中括号内传key，不进行赋值操作即为获取。
++ 返回key对应的value值
+
+#### 字典内置函数get获取方法
+
+获取字典中指定的key的value
+
++ dict.get(key, default=None)
++ key:需要获取value的key,default:key不存在则返回默认值，默认是None,我们也可以自定义。
+
+```python
+my_dict = {'name': 'James', 'age':33}
+name = my_dict.get('name')
+print(name)
+OUT: James
+```
+
+#### [] 与 get的区别
+
++ []如果获取的key不存在，则直接报错。
++ get如果获取的key不存在，则返回默认值。
++ 开发中，优先使用get函数
+
+### 字典的删除
+
+#### clear()的功能与用法
+
+清空当前字典中所有的数据
+
++ dict.clear()			-------> 无参数，无返回值。
+
+#### pop()的功能与用法
+
+删除字典中指定的key，并将其结果返回，如果key不存在则报错。
+
++ dict.pop(key)			------> key希望被删除的键
++ 返回这个key对应的值（value)
+
+#### del()函数的功能和用法
+
+```python
+my_dict = {'name': 'James', 'age':33}
+del my_dict['name']
+print(my_dict)
+OUT: {'age':33}	
+    
+del my_dict			#删除整个字典
+print(my_dict)
+```
+
+### 字典的copy()
+
+#### copy()的功能
+
+将当前字典复制一个新字典
+
+#### copy()的用法
+
+dict.copy()--------> 该函数无参数，返回一个一摸一样的内存地址不同的字典。
+
+### 字典中的成员判断
+
+#### in、not in 在字典中的用法
+
+
+
+#### 字典内置的get
+
+
+
+### 字典中的末尾删除函数popitem()
+
+#### popitem的功能
+
+删除当前字典里末尾一组键值对，并将其返回
+
+#### popitem的用法
+
++ dict.popitme() 		------> 	无需传参
++ 返回被删除的键值对，用元组包裹0索引是key,1索引是value。
+
+#### 注意事项
+
++ 如果字典为空，直接报错。
+
+### 所有数据类型与布尔值的关系
+
+字符串，数字，列表，元组，字典，空类型与布尔值的关系总结。
+
++ 每一种数据类型，自身的值都有表示True与False。
++ not 对于一切结果取反。
+
+| 数据类型 | 为True          | 为False               |
+| -------- | --------------- | --------------------- |
+| int      | 非0             | 0                     |
+| float    | 非0.0           | 0.0                   |
+| str      | len(str) != 0   | len(str) == 0，即""   |
+| list     | len(list) != 0  | len(list) == 0, 即[]  |
+| tuple    | len(tuple) != 0 | len(tuple) == 0, 即() |
+| dict     | len(dict) != 0  | len(dict) == 0, 即{}  |
+| None     | not None        | None                  |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
