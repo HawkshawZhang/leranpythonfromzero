@@ -422,11 +422,180 @@ OUT: 'hello 小穆'
 
   
 
+## 列表（元组）的操作及其它的内置函数
+
+### 列表（元组）操作符
+
+#### len在列表与元组上的使用
+
+```python
+names = ['xiaomu', 'James', 'xiaowang']
+length = len(names)
+print(length)
+OUT:3
+```
+
++ len函数可以计算出除数字类型外，所有数据类型的长度。
+
+#### 列表（元组）之间累加和乘法
+
++ 累加累乘生成新的列表
+
+```python
+names = ['xiaomu', 'James', 'xiaowang']
+new_names = names + names
+print(new_names)
+OUT:['xiaomu', 'James', 'xiaowang','xiaomu', 'James', 'xiaowang']
+new_names = names * 2
+print(new_names)
+OUT:['xiaomu', 'James', 'xiaowang','xiaomu', 'James', 'xiaowang']
+```
+
+#### in 和 not in 在列表和元组的用法
+
++ in是判断某个成员（元素）是否在此数据结构中。
++ not in 就说判断某个成员（元素）是否不在此数据结构中。
+
+### 列表的append()
+
+#### 功能
+
++ 将一个元素添加到当前列表中。
+
+#### 用法
+
++ list.append(new_item)
++ new_item:添加进列表中新的元素（成员）
+
+```python
+names = ['xiaomu']
+names.append('James')
+print(names)
+OUT:['xiaomu', 'James']
+```
+
+#### 注意事项
+
++ append添加的元素添加至末尾
++ append函数是在原有列表上添加，不需要额外添加新的变量。
+
+### 列表insert
+
+#### 功能
+
++ 将一个元素添加到当前列表的指定位置中。
+
+#### 用法
+
++ list_insert(index, new_iterm)
++ 参数： index ----> 新元素放到哪个位置， new_iterm----->添加的新元素（成员）
+
+#### insert()与append()的区别
+
++ append智能添加到列表的结尾，而insert可以选择任何一个位置。
++ 如果insert传入的位置在列表中并不存在，则将新元素添加至列表结尾。
++ 字符串，元组，列表元素位置从0开始运算
+
+### 列表中的count()
+
+#### 功能
+
++ 返回当前列表中某个成员的个数。
+
+#### 用法
+
++ inttype = list.count(iterm)
++ iterm:想要查询个数的元素
+
+#### 注意事项
+
++ 如果查询的成员不存在，则返回0
++ 列表指挥检查完整元素是否存在，并计算内容的数量
+
+### 列表的remove()
+
+#### 功能
+
++ 删除列表中的某个元素
+
+#### 用法
+
++ list.remove(item)
++ iterm:准备删除的列表元素
+
+#### 注意事项
+
++ 如果删除的元素不存在，程序会直接报错。
++ 如果删除的元素有多个，只会删除第一个。
++ remove()不会返回一个新的列表，而在原先列表中对元素进行删除。
+
+#### 内置函数del()
+
++ 将整个变量完全在内存中删除。
+
+### 列表中的reverse()
+
+#### 功能
+
++ 将当列表中的成员顺序颠倒
+
+#### 使用方法
+
++ list.reverse()
++ 无参数传递
+
+### Sort()函数
+
+#### 功能
+
+对当前列表按照一定规律进行排序
+
+#### 用法
+
++ list.sort(key=None, reverse=False)
++ key -- 参数比较
++ reverse-- 排序规则，reverse=True降序，reverse=False升序（默认）
+
+#### 注意事项
+
++ 列表中的元素类型必须相同，否则无法排序（报错)
+
+### 列表的clear()
+
+#### 功能
+
+将当前列表所有数据清空
+
+#### 用法
+
++ list.clear()----->该函数无参数，无返回值。
+
+### 列表的copy()
+
+#### 功能
+
+将当前的列表复制一份相同的列表，新列表与旧列表内容相同，但内存空间不同。
+
+#### 用法
+
++ list.copy()---->该函数无参数，返回一个一摸一样的列表。
+
+#### copy与2次赋值的区别
+
++ 二次赋值与原始变量有相同的内存空间--->快捷方式
++ copy函数创建的新列表与原始列表不是一个内存空间，不同享数据变更。
 
 
 
 
 
 
-### 字典的操作以及其他的内置函数
+
+
+
+
+
+
+
+## 字典的操作以及其他的内置函数
 
